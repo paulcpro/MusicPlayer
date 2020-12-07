@@ -55,6 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Custom Controls\MediumMusicDisplayer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -62,6 +66,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Custom Controls\MediumMusicDisplayer.xaml.cs">
+      <DependentUpon>MediumMusicDisplayer.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -93,6 +100,51 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\mistral.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\001-next.png" />
+    <Resource Include="Assets\002-music.png" />
+    <Resource Include="Assets\003-stop.png" />
+    <Resource Include="Assets\004-settings.png" />
+    <Resource Include="Assets\005-loop.png" />
+    <Resource Include="Assets\006-loop-1.png" />
+    <Resource Include="Assets\007-controller.png" />
+    <Resource Include="Assets\008-maximize.png" />
+    <Resource Include="Assets\009-headphone.png" />
+    <Resource Include="Assets\010-unlock.png" />
+    <Resource Include="Assets\011-back.png" />
+    <Resource Include="Assets\012-upload.png" />
+    <Resource Include="Assets\013-play.png" />
+    <Resource Include="Assets\014-like.png" />
+    <Resource Include="Assets\015-refresh.png" />
+    <Resource Include="Assets\016-share.png" />
+    <Resource Include="Assets\017-bars-graphics.png" />
+    <Resource Include="Assets\018-minimize.png" />
+    <Resource Include="Assets\019-reduce-volume.png" />
+    <Resource Include="Assets\020-menu.png" />
+    <Resource Include="Assets\021-pause.png" />
+    <Resource Include="Assets\022-power-button.png" />
+    <Resource Include="Assets\023-recording.png" />
+    <Resource Include="Assets\024-low-volume.png" />
+    <Resource Include="Assets\025-shuffle.png" />
+    <Resource Include="Assets\026-recording-1.png" />
+    <Resource Include="Assets\027-information.png" />
+    <Resource Include="Assets\028-folder.png" />
+    <Resource Include="Assets\029-previous.png" />
+    <Resource Include="Assets\030-mute.png" />
+    <Resource Include="Assets\031-skip.png" />
+    <Resource Include="Assets\032-forwards.png" />
+    <Resource Include="Assets\033-forwards-1.png" />
+    <Resource Include="Assets\034-volume-adjustment.png" />
+    <Resource Include="Assets\035-volume-up.png" />
+    <Resource Include="Assets\036-rate.png" />
+    <Resource Include="Assets\037-question-mark.png" />
+    <Resource Include="Assets\038-padlock.png" />
+    <Resource Include="Assets\039-skip-1.png" />
+    <Resource Include="Assets\040-backward.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -4,9 +4,96 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MusicPlayer"
+        xmlns:ccontrols="clr-namespace:MusicPlayer.Custom_Controls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Height="450" Width="800" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Border Background="Transparent">
+        <Border Background="#0D122F">
+            <Grid>
+                <!-- Global Structure -->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <!-- Left Menu Structure -->
+                <StackPanel Grid.Column="0" Grid.Row="0">
+                    <!-- Explore Menu -->
+                    <TextBlock Text="Menu" Foreground="#4D5A88" HorizontalAlignment="Left" Margin="10, 45, 15, 5"/>
+                    <Grid HorizontalAlignment="Left" Margin="15, 5, 15, 5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0" Source="./Assets/007-controller.png" Width="15" Stretch="Uniform"/>
+                        <TextBlock Grid.Column="1" Text="Daily Mixdazaz" FontSize="12" Foreground="#D2D2D2" TextAlignment="Left" Margin="10,0,0,0" />
+                    </Grid>
+                    <Grid HorizontalAlignment="Left" Margin="15, 10, 15, 5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0" Source="./Assets/002-music.png" Width="15" Stretch="Uniform"/>
+                        <TextBlock Grid.Column="1" Text="Songs" FontSize="12" Foreground="#D2D2D2" TextAlignment="Left" Margin="10,0,0,0"/>
+                    </Grid>
+                    <Grid HorizontalAlignment="Left" Margin="15, 10, 15, 5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0" Source="./Assets/020-menu.png" Width="15" Stretch="Uniform"/>
+                        <TextBlock Grid.Column="1" Text="Playlists" FontSize="12" Foreground="#D2D2D2" TextAlignment="Left" Margin="10,0,0,0"/>
+                    </Grid>
+                    <Grid HorizontalAlignment="Left" Margin="15, 10, 15, 5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0" Source="./Assets/026-recording-1.png" Width="15" Stretch="Uniform"/>
+                        <TextBlock Grid.Column="1" Text="Radio" FontSize="12" Foreground="#D2D2D2" TextAlignment="Left" Margin="10,0,0,0"/>
+                    </Grid>
+                    <!-- End of Explore Menu -->
+
+                    <!-- Playlists Menu -->
+                    <TextBlock Text="Playlists" Margin="10, 30, 15, 5" Foreground="#4D5A88" Grid.Column="0" Grid.Row="1"/>
+                    <Grid HorizontalAlignment="Left" Margin="15, 10, 15, 5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0" Source="./Assets/036-rate.png" Width="15" Stretch="Uniform"/>
+                        <TextBlock Grid.Column="1" Text="Style1" FontSize="12" Foreground="#D2D2D2" TextAlignment="Left" Margin="10, 0, 0,0"/>
+                    </Grid>
+                    <Grid HorizontalAlignment="Left" Margin="15, 10, 15, 5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0" Source="./Assets/036-rate.png" Width="15" Stretch="Uniform"/>
+                        <TextBlock Grid.Column="1" Text="Style2" FontSize="12" Foreground="#D2D2D2" TextAlignment="Left" Margin="10, 0, 0,0"/>
+                    </Grid>
+                    <Grid HorizontalAlignment="Left" Margin="15, 10, 15, 5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0" Source="./Assets/036-rate.png" Width="15" Stretch="Uniform"/>
+                        <TextBlock Grid.Column="1" Text="Style2" FontSize="12" Foreground="#D2D2D2" TextAlignment="Left" Margin="10, 0, 0,0"/>
+                    </Grid>
+                    <!-- End of Playlists Menu-->
+                </StackPanel>
+                <!-- End of the left menu structure -->
+
+                <!-- Music In Listen -->
+                <StackPanel Grid.Row="2" Orientation="Horizontal" Grid.ColumnSpan="2">
+                    <ccontrols:MediumMusicDisplayer Margin="15,0,15,0" ImageSource="./Assets/mistral.png" FirstBlockText="Soso Maness" SecondBlockText="Zodiaque" Foreground="White"/>
+                </StackPanel>
+                <!-- End of Music in listen -->
+            </Grid>
+        </Border>
+    </Border>
 </Window>
