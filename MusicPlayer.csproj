@@ -55,6 +55,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Custom Controls\HighCircularArtist.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Custom Controls\HighMusicDisplayer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Custom Controls\MediumMusicDisplayer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -66,6 +74,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Custom Controls\HighCircularArtist.xaml.cs">
+      <DependentUpon>HighCircularArtist.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Custom Controls\HighMusicDisplayer.xaml.cs">
+      <DependentUpon>HighMusicDisplayer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Custom Controls\MediumMusicDisplayer.xaml.cs">
       <DependentUpon>MediumMusicDisplayer.xaml</DependentUpon>
@@ -145,6 +159,12 @@
     <Resource Include="Assets\038-padlock.png" />
     <Resource Include="Assets\039-skip-1.png" />
     <Resource Include="Assets\040-backward.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\folder.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\davodka.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

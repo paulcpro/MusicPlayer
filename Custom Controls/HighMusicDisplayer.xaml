@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="MusicPlayer.Custom_Controls.HighMusicDisplayer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ccontrols="clr-namespace:MusicPlayer.Custom_Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="150" d:DesignWidth="150">
+    <Border CornerRadius="20" Background="Transparent">
+        <Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="110"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Image x:Name="AlbumsCover" Source="{Binding Path=ImageSource}" Grid.Column="0"/>
+                <StackPanel Grid.Row="1">
+                    <TextBlock x:Name="Album" Text="{Binding Path=AlbumName}" FontSize="16"/>
+                    <TextBlock x:Name="Songs" Text="{Binding Path=SongsNumber}" FontSize="12"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>
