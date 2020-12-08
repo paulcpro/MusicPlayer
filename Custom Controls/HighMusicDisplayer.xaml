@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:ccontrols="clr-namespace:MusicPlayer.Custom_Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="150" d:DesignWidth="150">
+             d:DesignHeight="130" d:DesignWidth="150">
     <Border CornerRadius="20" Background="Transparent">
         <Grid>
             <Grid>
