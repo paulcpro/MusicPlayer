@@ -116,6 +116,9 @@
                 
                 - Modifier la couleur du haut de l'interface en : #0E1848
                 
+                - Faire en sorte que la bar du haut bouge l'interface en étant en None
+                pour le window style
+                
                 -->
                 <!-- Style Structure -->
 
@@ -131,7 +134,6 @@
 
                 <!-- Left Menu Structure -->
                 <StackPanel Grid.Column="0" Grid.Row="0">
-                    <!-- Add Resizing buttons -->
                     <!-- Explore Menu -->
                     <TextBlock Text="Menu" Foreground="#4D5A88" HorizontalAlignment="Left" Margin="10, 45, 15, 5"/>
                     <StackPanel Margin="15,5,0,0" Grid.Column="0">
