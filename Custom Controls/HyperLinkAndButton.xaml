@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MusicPlayer.Custom_Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="35" d:DesignWidth="200">
+             d:DesignHeight="35" d:DesignWidth="150">
     <UserControl.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
@@ -69,12 +69,12 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <Button Grid.Column="0" Style="{DynamicResource ButtonStyle1}">
+        <Button Margin="10,10,0,0" Grid.Column="0" Style="{DynamicResource ButtonStyle1}">
             <Button.Content>
                 <Image  x:Name="Category" Source="{Binding ImageSource}" Width="15"/>
             </Button.Content>
         </Button>
-        <Button Margin="10,0,0,0" Grid.Column="1" Style="{DynamicResource ButtonStyle1}">
+        <Button Margin="10,10,0,0" Grid.Column="1" Style="{DynamicResource ButtonStyle1}">
             <Button.Content>
                 <TextBlock x:Name="HyperLink" Text="{Binding CategoryText}"/>
             </Button.Content>

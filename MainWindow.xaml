@@ -114,9 +114,8 @@
                   Et non directement dans les Elements (Ex: Button)
                   Afin d'éviter que ça clique sur le bouton + la marge de décalage
                 
-                - Modifier la oculeur du haut de l'interface en : #0E1848
+                - Modifier la couleur du haut de l'interface en : #0E1848
                 
-                - Rajouter un espacement entre chaque bouton hyperlink du menu de gauche
                 -->
                 <!-- Style Structure -->
 
@@ -135,17 +134,19 @@
                     <!-- Add Resizing buttons -->
                     <!-- Explore Menu -->
                     <TextBlock Text="Menu" Foreground="#4D5A88" HorizontalAlignment="Left" Margin="10, 45, 15, 5"/>
-                    <StackPanel Margin="15,10,0,0" Grid.Column="0">
+                    <StackPanel Margin="15,5,0,0" Grid.Column="0">
+                        <ccontrols:HyperLinkAndButton ImageSource="./Assets/008-maximize.png" CategoryText="Explore"/>
                         <ccontrols:HyperLinkAndButton ImageSource="./Assets/007-controller.png" CategoryText="Daily Mix"/>
                         <ccontrols:HyperLinkAndButton ImageSource="./Assets/002-music.png" CategoryText="Songs"/>
+                        <ccontrols:HyperLinkAndButton ImageSource="./Assets/028-folder.png" CategoryText="Albums"/>
                         <ccontrols:HyperLinkAndButton ImageSource="./Assets/020-menu.png" CategoryText="Playlists"/>
                         <ccontrols:HyperLinkAndButton ImageSource="./Assets/026-recording-1.png" CategoryText="Radio"/>
                     </StackPanel>
                     <!-- End of Explore Menu -->
 
                     <!-- Playlists Menu -->
-                    <TextBlock Text="Playlists" Margin="10, 30, 15, 5" Foreground="#4D5A88" Grid.Column="0" Grid.Row="1"/>
-                    <StackPanel Margin="15,10,0,0">
+                    <TextBlock Text="Playlists" Margin="10, 50, 15, 5" Foreground="#4D5A88" Grid.Column="0" Grid.Row="1"/>
+                    <StackPanel Margin="15,5,0,0">
                         <ccontrols:HyperLinkAndButton ImageSource="./Assets/036-rate.png" CategoryText="Style1"/>
                         <ccontrols:HyperLinkAndButton ImageSource="./Assets/036-rate.png" CategoryText="Style1"/>
                         <ccontrols:HyperLinkAndButton ImageSource="./Assets/036-rate.png" CategoryText="Style1"/>
@@ -236,6 +237,12 @@
                             <Button Grid.Column="1" Content="PLAY HERE" FontSize="16" Height="40" Width="115" Background="Transparent" Foreground="White" Margin="0,20,250,0" Style="{DynamicResource RoundButton}"/>
                         </StackPanel>
                         <TextBlock Text="Pictures with buttons of the artist" FontSize="12" Foreground="White" Grid.Column="2"/>
+                        <Grid Grid.Column="2">
+                            <Border Grid.Row="0" CornerRadius="30" Height="90">
+                                <Image x:Name="ArtistImage"  Source="{Binding Path=ImageSource}"/>
+                            </Border>
+                            <TextBlock x:Name="Artist" Grid.Row="1" Text="{Binding Path=ArtistName}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,30,0,0"/>
+                        </Grid>
                         <Button Grid.Column="2" Height="20" Width="40" Background="Transparent" Content="Play" Foreground="White" BorderThickness="0" Style="{DynamicResource menuButtonTemplate}"/>
                     </Grid>
 

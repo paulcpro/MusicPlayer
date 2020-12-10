@@ -180,5 +180,8 @@
   <ItemGroup>
     <Resource Include="Assets\davodka.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\profile.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
