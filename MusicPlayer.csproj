@@ -55,11 +55,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Custom Controls\CircleButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Custom Controls\HighCircularArtist.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Custom Controls\HighMusicDisplayer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Custom Controls\HyperLinkAndButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -75,11 +83,17 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Custom Controls\CircleButton.xaml.cs">
+      <DependentUpon>CircleButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Custom Controls\HighCircularArtist.xaml.cs">
       <DependentUpon>HighCircularArtist.xaml</DependentUpon>
     </Compile>
     <Compile Include="Custom Controls\HighMusicDisplayer.xaml.cs">
       <DependentUpon>HighMusicDisplayer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Custom Controls\HyperLinkAndButton.xaml.cs">
+      <DependentUpon>HyperLinkAndButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Custom Controls\MediumMusicDisplayer.xaml.cs">
       <DependentUpon>MediumMusicDisplayer.xaml</DependentUpon>

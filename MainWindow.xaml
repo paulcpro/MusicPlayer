@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MusicPlayer"
         xmlns:ccontrols="clr-namespace:MusicPlayer.Custom_Controls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1080" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="800" Width="1080" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
@@ -17,7 +17,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="Transparent"/>
         <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
         <SolidColorBrush x:Key="Button.MouseOver.Background" Color="Transparent"/>
         <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
@@ -31,7 +31,7 @@
             <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
             <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Padding" Value="1"/>
@@ -39,6 +39,44 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="RoundButton" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" CornerRadius="20" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
                             <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -75,13 +113,17 @@
                   Il faudra mettre les margins sur les Grids
                   Et non directement dans les Elements (Ex: Button)
                   Afin d'éviter que ça clique sur le bouton + la marge de décalage
+                
+                - Modifier la oculeur du haut de l'interface en : #0E1848
+                
+                - Rajouter un espacement entre chaque bouton hyperlink du menu de gauche
                 -->
                 <!-- Style Structure -->
 
                 <!-- Global Structure -->
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="190"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="920"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -93,80 +135,38 @@
                     <!-- Add Resizing buttons -->
                     <!-- Explore Menu -->
                     <TextBlock Text="Menu" Foreground="#4D5A88" HorizontalAlignment="Left" Margin="10, 45, 15, 5"/>
-                    <Grid HorizontalAlignment="Left" Margin="15, 5, 15, 5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0" Source="./Assets/007-controller.png" Width="15" Stretch="Uniform"/>
-                        <TextBlock Grid.Column="1" Text="Daily Mix" FontSize="12" Foreground="#D2D2D2" TextAlignment="Left" Margin="10,0,0,0" />
-                    </Grid>
-                    <Grid HorizontalAlignment="Left" Margin="15, 10, 15, 5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0" Source="./Assets/002-music.png" Width="15" Stretch="Uniform"/>
-                        <TextBlock Grid.Column="1" Text="Songs" FontSize="12" Foreground="#D2D2D2" TextAlignment="Left" Margin="10,0,0,0"/>
-                    </Grid>
-                    <Grid HorizontalAlignment="Left" Margin="15, 10, 15, 5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0" Source="./Assets/020-menu.png" Width="15" Stretch="Uniform"/>
-                        <TextBlock Grid.Column="1" Text="Playlists" FontSize="12" Foreground="#D2D2D2" TextAlignment="Left" Margin="10,0,0,0"/>
-                    </Grid>
-                    <Grid HorizontalAlignment="Left" Margin="15, 10, 15, 5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0" Source="./Assets/026-recording-1.png" Width="15" Stretch="Uniform"/>
-                        <TextBlock Grid.Column="1" Text="Radio" FontSize="12" Foreground="#D2D2D2" TextAlignment="Left" Margin="10,0,0,0"/>
-                    </Grid>
+                    <StackPanel Margin="15,10,0,0" Grid.Column="0">
+                        <ccontrols:HyperLinkAndButton ImageSource="./Assets/007-controller.png" CategoryText="Daily Mix"/>
+                        <ccontrols:HyperLinkAndButton ImageSource="./Assets/002-music.png" CategoryText="Songs"/>
+                        <ccontrols:HyperLinkAndButton ImageSource="./Assets/020-menu.png" CategoryText="Playlists"/>
+                        <ccontrols:HyperLinkAndButton ImageSource="./Assets/026-recording-1.png" CategoryText="Radio"/>
+                    </StackPanel>
                     <!-- End of Explore Menu -->
 
                     <!-- Playlists Menu -->
                     <TextBlock Text="Playlists" Margin="10, 30, 15, 5" Foreground="#4D5A88" Grid.Column="0" Grid.Row="1"/>
-                    <Grid HorizontalAlignment="Left" Margin="15, 10, 15, 5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0" Source="./Assets/036-rate.png" Width="15" Stretch="Uniform"/>
-                        <TextBlock Grid.Column="1" Text="Style1" FontSize="12" Foreground="#D2D2D2" TextAlignment="Left" Margin="10, 0, 0,0"/>
-                    </Grid>
-                    <Grid HorizontalAlignment="Left" Margin="15, 10, 15, 5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0" Source="./Assets/036-rate.png" Width="15" Stretch="Uniform"/>
-                        <TextBlock Grid.Column="1" Text="Style2" FontSize="12" Foreground="#D2D2D2" TextAlignment="Left" Margin="10, 0, 0,0"/>
-                    </Grid>
-                    <Grid HorizontalAlignment="Left" Margin="15, 10, 15, 5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0" Source="./Assets/036-rate.png" Width="15" Stretch="Uniform"/>
-                        <TextBlock Grid.Column="1" Text="Style2" FontSize="12" Foreground="#D2D2D2" TextAlignment="Left" Margin="10, 0, 0,0"/>
-                    </Grid>
-                    <!-- End of Playlists Menu-->
+                    <StackPanel Margin="15,10,0,0">
+                        <ccontrols:HyperLinkAndButton ImageSource="./Assets/036-rate.png" CategoryText="Style1"/>
+                        <ccontrols:HyperLinkAndButton ImageSource="./Assets/036-rate.png" CategoryText="Style1"/>
+                        <ccontrols:HyperLinkAndButton ImageSource="./Assets/036-rate.png" CategoryText="Style1"/>
+                    </StackPanel>
                 </StackPanel>
-                <Grid Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="15,10,15,5">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
+                <!-- End of Playlists Menu-->
 
-                    </Grid.ColumnDefinitions>
-                    <ccontrols:MediumMusicDisplayer ImageSource="./Assets/folder.jpg" FirstBlockText="Davodka" SecondBlockText="Ligne de conduite" Foreground="White"/>
-                </Grid>
+                <Border Background="#161E43" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" CornerRadius="0,0,0,20">
+                    <Grid HorizontalAlignment="Left" Margin="15,10,15,5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <ccontrols:MediumMusicDisplayer ImageSource="./Assets/folder.jpg" FirstBlockText="Davodka" SecondBlockText="Ligne de conduite" Foreground="White"/>
+                    </Grid>
+                </Border>
                 <!-- End of the left menu structure -->
 
                 <!-- Main Content -->
                 <Grid Grid.Column="1">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -176,40 +176,74 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <Border Grid.Column="0" Background="Transparent">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="429*"/>
-                                <ColumnDefinition Width="429*"/>
-                            </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                    </Grid>
+                    <!-- Search Bar -->
+                    <Grid Grid.Column="0" Grid.Row="0" Margin="35,0,0,0" Height="50">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="350"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Background="Transparent" Style="{DynamicResource menuButtonTemplate}" Height="20">
+                            <Button.Content>
+                                <Image  Grid.Column="0" VerticalAlignment="Center" Source="./Assets/006-loop-1.png" Width="15" Height="20"/>
+                            </Button.Content>
+                        </Button>
+                        <TextBlock Grid.Column="1" VerticalAlignment="Center" Text="Search songs, albums, artist and playlists..." FontSize="16" Foreground="#4C567E" Background="Transparent" Height="20" Margin="10,0 ,0,0"/>
+                    </Grid>
 
-                            <!-- Search Bar -->
-                            <StackPanel Orientation="Horizontal" Height="30" Grid.Row="0" Margin="40,10,5,0" Grid.ColumnSpan="2">
-                                <Image VerticalAlignment="Center" Source="./Assets/006-loop-1.png" Width="15" Height="20"/>
-                                <TextBlock VerticalAlignment="Center" Text="Search songs, albums, artist and playlists..." FontSize="12" Foreground="#4C567E" Background="Transparent" Height="20" Margin="10,0 ,0,0"/>
-                                <!-- ImageSource / Text / ImageSource -->
-                                <StackPanel Orientation="Horizontal" Margin="500,0,0,0">
-                                    <Image Source="./Assets/Profile.png" Height="20"/>
-                                    <TextBlock Text="Ring0" Margin="10, 0, 0, 0" FontSize="14" Foreground="White" Height="20"/>
-                                    <Image />
-                                    <!-- Ajouté une icone fleche -->
-                                </StackPanel>
-                            </StackPanel>
-                        </Grid>
-                    </Border>
+                    <!-- User Profile -->
+                    <Grid Grid.Column="1" Margin="290,0,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0" Source="./Assets/Profile.png" Height="20" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" Text="Ring0" FontSize="14" Foreground="White" Height="20" VerticalAlignment="Center"/>
+                        <Button Grid.Column="2" Background="Transparent" BorderThickness="0" Style="{DynamicResource menuButtonTemplate}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0">
+                            <Button.Content>
+                                <Image Source="./Assets/004-settings.png" Height="20"/>
+                            </Button.Content>
+                        </Button>
+                    </Grid>
 
+                    
                     <!-- New album -->
-                    <TextBlock Text="Nouvel album disponible" FontSize="12" Foreground="White" Grid.Row="1" Grid.ColumnSpan="2"/>
-                    <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,20,0,10" Grid.ColumnSpan="2" Background="#0E1848">
-                        <TextBlock Text="Random" FontSize="12" Foreground="White"/>
-                        <StackPanel>
-                            <TextBlock Text="Mise au poing new album" FontSize="34" Foreground="White"/>
-                            <Border BorderThickness="10" CornerRadius="15">
-                                <Button Content="PLAY HERE" FontSize="16" Background="Transparent" Foreground="White" Margin="10,20,10,10"/>
-                            </Border>
+                    <Grid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="50,0,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Vertical" Margin="0,90,0,0">
+                            <ccontrols:CircleButton/>
+                            <ccontrols:CircleButton/>
+                            <ccontrols:CircleButton/>
+                            <ccontrols:CircleButton/>
                         </StackPanel>
-                        <TextBlock Text="Pictures with buttons of the artist" FontSize="12" Foreground="White"/>
-                    </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Vertical" Margin="35,30,0,0">
+                            <TextBlock Text="Mise au poing" FontSize="34" Foreground="White" Grid.Column="1"/>
+                            <TextBlock Text="new album" FontSize="34" Foreground="White" Grid.Column="1" Margin="0,5,0,0"/>
+                            <Button Grid.Column="1" Content="PLAY HERE" FontSize="16" Height="40" Width="115" Background="Transparent" Foreground="White" Margin="0,20,250,0" Style="{DynamicResource RoundButton}"/>
+                        </StackPanel>
+                        <TextBlock Text="Pictures with buttons of the artist" FontSize="12" Foreground="White" Grid.Column="2"/>
+                        <Button Grid.Column="2" Height="20" Width="40" Background="Transparent" Content="Play" Foreground="White" BorderThickness="0" Style="{DynamicResource menuButtonTemplate}"/>
+                    </Grid>
+
+                    <!--<StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,20,0,10" Grid.ColumnSpan="2" Background="#0E1848">
+                        <StackPanel>
+                            
+                        </StackPanel>
+                    </StackPanel>-->
 
                     <!-- Playlists Selected -->
                     <TextBlock Text="Playlists selected for you" FontSize="12" Foreground="#4C567E" Grid.Row="2" Grid.ColumnSpan="2" Background="#0D1436"/>
@@ -223,7 +257,7 @@
                     </StackPanel>
 
                     <!-- Artits Liked -->
-                    <TextBlock Grid.Row="3" FontSize="12" Foreground="White" Text="Artists you may like" Grid.ColumnSpan="2" Background="#0D1436"/>
+                    <TextBlock Grid.Row="3" FontSize="12" Foreground="#4C567E" Text="Artists you may like" Grid.ColumnSpan="2" Background="#0D1436"/>
                     <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="0,20,0,10" Grid.ColumnSpan="2" Background="#0D1436">
                         <ccontrols:HighCircularArtist ImageSource="./Assets/davodka.jpg" ArtistName="Davodka" Foreground="White" FontSize="14" Margin="10,10,0,0"/>
                         <ccontrols:HighCircularArtist ImageSource="./Assets/davodka.jpg" ArtistName="Davodka" Foreground="White" FontSize="14" Margin="15,10,25,0"/>
@@ -234,60 +268,71 @@
                 </Grid>
 
                 <!-- Music In Listen -->
-                <Grid Grid.Row="1" Grid.Column="1">
-                    <StackPanel Orientation="Horizontal">
-                        <Grid Margin="15" Height="40">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Button Grid.Column="0" Background="Transparent" BorderThickness="0" Height="20" Style="{DynamicResource menuButtonTemplate}">
-                                <Button.Content>
-                                    <Image Source="./Assets/025-shuffle.png" Stretch="Uniform" Width="15" />
-                                </Button.Content>
-                            </Button>
-                            <Button Grid.Column="1" Background="Transparent" BorderThickness="0" Height="25" Style="{DynamicResource menuButtonTemplate}">
-                                <Button.Content>
-                                    <Image Source="./Assets/011-back.png" Stretch="Uniform" Width="20" Height="20"/>
-                                </Button.Content>
-                            </Button>
-                            <Button Grid.Column="2" Background="Transparent" BorderThickness="0" Height="45" Style="{DynamicResource menuButtonTemplate}">
-                                <Button.Content>
-                                    <Image Source="./Assets/013-play.png" Stretch="Uniform" Width="35"/>
-                                </Button.Content>
-                            </Button>
-                            <Button Grid.Column="3" Background="Transparent" BorderThickness="0" Height="25" Style="{DynamicResource menuButtonTemplate}">
-                                <Button.Content>
-                                    <Image Source="./Assets/001-next.png" Stretch="Uniform" Width="20"/>
-                                </Button.Content>
-                            </Button>
-                            <Button Grid.Column="4" Background="Transparent" BorderThickness="0" Height="20" Style="{DynamicResource menuButtonTemplate}">
-                                <Button.Content>
-                                    <Image Source="./Assets/006-loop-1.png" Stretch="Uniform" Width="15"/>
-                                </Button.Content>
-                            </Button>
-                        </Grid>
+                <Grid Grid.Row="1" Grid.Column="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="450"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
 
-                        <TextBox Text="00:00" Margin="35,0,10,0" VerticalAlignment="Center" BorderThickness="0" Background="Transparent" Foreground="White"/>
-                        <Slider Width="300" VerticalAlignment="Center"/>
-                        <TextBox Text="03:45" Margin="10,0,0,0" Background="Transparent" BorderThickness="0" Foreground="White" VerticalAlignment="Center"/>
+                    <Grid Width="250" Margin="35,0,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="20"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Background="Transparent" BorderThickness="0" Height="20" Style="{DynamicResource menuButtonTemplate}">
+                            <Button.Content>
+                                <Image Source="./Assets/025-shuffle.png" Stretch="Uniform" Width="15" />
+                            </Button.Content>
+                        </Button>
+                        <Button Grid.Column="1" Background="Transparent" BorderThickness="0" Height="25" Style="{DynamicResource menuButtonTemplate}">
+                            <Button.Content>
+                                <Image Source="./Assets/011-back.png" Stretch="Uniform" Width="20" Height="20"/>
+                            </Button.Content>
+                        </Button>
+                        <Button Grid.Column="2" Background="Transparent" BorderThickness="0" Height="45" Style="{DynamicResource menuButtonTemplate}">
+                            <Button.Content>
+                                <Image Source="./Assets/013-play.png" Stretch="Uniform" Width="35"/>
+                            </Button.Content>
+                        </Button>
+                        <Button Grid.Column="3" Background="Transparent" BorderThickness="0" Height="25" Style="{DynamicResource menuButtonTemplate}">
+                            <Button.Content>
+                                <Image Source="./Assets/001-next.png" Stretch="Uniform" Width="20"/>
+                            </Button.Content>
+                        </Button>
+                        <Button Grid.Column="4" Background="Transparent" BorderThickness="0" Height="20" Style="{DynamicResource menuButtonTemplate}">
+                            <Button.Content>
+                                <Image Source="./Assets/006-loop-1.png" Stretch="Uniform" Width="15"/>
+                            </Button.Content>
+                        </Button>
+                    </Grid>
 
-                        <Grid Margin="110,0,0,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Button Grid.Column="0" Grid.Row="5" Background="Transparent" BorderThickness="0" Height="20">
-                                <Button.Content>
-                                    <Image Source="./Assets/034-volume-adjustment.png" Stretch="Uniform" Width="20" VerticalAlignment="Center"/>
-                                </Button.Content>
-                            </Button>
-                            <Slider Grid.Column="1" Width="100" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                        </Grid>
-                    </StackPanel>
+                    <Grid Grid.Column="1" Margin="50,0,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="300"/>
+                            <ColumnDefinition Width="50"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Text="00:00" Grid.Column="0" Margin="0,0,10,0" VerticalAlignment="Center" BorderThickness="0" Background="Transparent" Foreground="White"/>
+                        <Slider Width="300" Grid.Column="1" VerticalAlignment="Center"/>
+                        <TextBox Text="03:45" Grid.Column="2" Margin="10,0,0,0" Background="Transparent" BorderThickness="0" Foreground="White" VerticalAlignment="Center"/>
+                    </Grid>
+
+                    <Grid Grid.Column="2" Margin="80,0,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Grid.Row="5" Background="Transparent" BorderThickness="0" Height="20" Style="{DynamicResource menuButtonTemplate}">
+                            <Button.Content>
+                                <Image Source="./Assets/034-volume-adjustment.png" Stretch="Uniform" Width="20" VerticalAlignment="Center"/>
+                            </Button.Content>
+                        </Button>
+                        <Slider Grid.Column="1" Width="100" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10"/>
+                    </Grid>
                 </Grid>
                 <!-- End of Music in listen -->
             </Grid>

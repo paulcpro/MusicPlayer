@@ -13,18 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MusicPlayer
+namespace MusicPlayer.Custom_Controls
 {
     /// <summary>
-    /// Logique d'interaction pour MainWindow.xaml
+    /// Logique d'interaction pour CircleButton.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class CircleButton : UserControl
     {
-        public MainWindow()
+        public CircleButton()
         {
             InitializeComponent();
         }
-
     }
-
 }
