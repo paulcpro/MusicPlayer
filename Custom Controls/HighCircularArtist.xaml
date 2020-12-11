@@ -5,15 +5,27 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:ccontrols="clr-namespace:MusicPlayer.Custom_Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="120" d:DesignWidth="120">
+             d:DesignHeight="125" d:DesignWidth="125">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
-        <Border Grid.Row="0" CornerRadius="30" Height="90">
+        <!--<Border Grid.Row="0" CornerRadius="30" Height="90">
             <Image x:Name="ArtistImage"  Source="{Binding Path=ImageSource}"/>
         </Border>
-        <TextBlock x:Name="Artist" Grid.Row="1" Text="{Binding Path=ArtistName}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,30,0,0"/>
+        <TextBlock x:Name="Artist" Grid.Row="1" Text="{Binding Path=ArtistName}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,20,0,0"/>-->
+
+        <!--<Ellipse Width="100" Height="100" Grid.Row="0">
+            <Ellipse.Fill>
+                <ImageBrush ImageSource="{Binding Path=ImageSource}"/>
+            </Ellipse.Fill>
+        </Ellipse>-->
+        <Ellipse Height="100" Width="100">
+            <Ellipse.Fill>
+                <ImageBrush x:Name="ArtistImage" ImageSource="{Binding Path=ImageSource}"/>
+            </Ellipse.Fill>
+        </Ellipse>
+        <TextBlock x:Name="Artist" Grid.Row="1" Text="{Binding Path=ArtistName}" VerticalAlignment="Top" HorizontalAlignment="Center"/>
     </Grid>
 </UserControl>
